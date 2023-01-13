@@ -41,7 +41,7 @@ add_bg_from_local('CollegeAhuntsic_Logo.png')
 
 #st.sidebar.header('Dashboard `Version 2`')
 
-#client = pymongo.MongoClient("localhost")
+#URI = "localhost"
 URI = f"mongodb+srv://{st.secrets['db_username']}:{st.secrets['db_pw']}@toucanfortune.gzo0glz.mongodb.net/?retryWrites=true&writeConcern=majority"
 client = pymongo.MongoClient(URI)
 db = client.toucan
@@ -104,8 +104,8 @@ figure = plt.figure(figsize=(16,6))
 plt.plot(df_hour.Appliances)
 plt.xticks(rotation=45)
 plt.xlabel('Date')
-plt.ylabel('Appliances consumption in Wh')
-st.header('Appliances consumption')
+plt.ylabel('Wh')
+st.header('Consommation')
 st.pyplot(figure)
 
 # Functions to be used from the plots
@@ -126,20 +126,20 @@ figure2 = plt.figure()
 # plt.bar(df.index, daily('appliances'))
 daily('Appliances').plot(kind = 'bar', figsize=(10,8))
 ticks = list(range(0, 7, 1))
-labels = "Mon Tues Weds Thurs Fri Sat Sun".split()
-plt.xlabel('Day')
-plt.ylabel('Appliances consumption in Wh')
+labels = "lun mar mer jeu ven sam dim".split()
+plt.xlabel('Jour')
+plt.ylabel('Wh')
 plt.xticks(ticks, labels)
-st.header('Mean Energy Consumption per Day of Week')
+st.header('Consommation moyenne par jour')
 st.pyplot(figure2)
 
 figure3 = plt.figure()
 hourly('Appliances').plot()
-plt.xlabel('Hour')
-plt.ylabel('Appliances consumption in Wh')
+plt.xlabel('Heure')
+plt.ylabel('Wh')
 ticks = list(range(0, 24, 1))
 plt.xticks(ticks)
-st.header('Mean Energy Consumption per Hour of a Day')
+st.header('Consommation moyenne par heure')
 st.pyplot(figure3)
 
 figure4 = plt.figure()
@@ -147,24 +147,24 @@ figure4 = plt.figure()
 y_label = [calendar.month_name[i] for i in pd.unique(df.index.month)]
 
 ax=sns.heatmap(monthly_daily('Appliances').T,cmap="YlGnBu",
-               xticklabels="Mon Tues Weds Thurs Fri Sat Sun".split(),
+               xticklabels="lun mar mer jeu ven sam dim".split(),
                # yticklabels="January February March April May".split(),
                 yticklabels=y_label,
                annot=True, fmt='g')
-st.header('Mean consumption per Weekday of Month')
+st.header('Consommation moyenne par jour du mois')
 st.pyplot(figure4)
 
 f, axes = plt.subplots(1, 2,)
 
 sns.distplot(df_hour.Appliances, hist=True, color = 'blue',hist_kws={'edgecolor':'black'},ax=axes[0])
-axes[0].set_title("Appliance's consumption")
-axes[0].set_xlabel('Appliances wH')
+axes[0].set_title("Consommation")
+axes[0].set_xlabel('wH')
 
 sns.distplot(df_hour.log_appliances, hist=True, color = 'blue',hist_kws={'edgecolor':'black'},ax=axes[1])
-axes[1].set_title("Log Appliance's consumption")
-axes[1].set_xlabel('Appliances log(wH)')
+axes[1].set_title("Consommation (log)")
+axes[1].set_xlabel('log(wH)')
 
-st.header("Histogram of Appliance's consumption")
+st.header("Histogramme de la consommation")
 st.pyplot(f)
 
 # Pearson Correlation among the variables
@@ -173,6 +173,6 @@ corr = df[col].corr()
 figure5 = plt.figure()
 sns.set(font_scale=1)
 sns.heatmap(corr, cbar = True, annot=True, square = True, fmt = '.2f', xticklabels=col, yticklabels=col)
-st.header("Pearson Correlation among the variables")
+st.header("Corrélations des features")
 st.pyplot(figure5)
 

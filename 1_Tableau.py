@@ -37,7 +37,7 @@ add_bg_from_local('CollegeAhuntsic_Logo.png')
 
 #st.sidebar.header('Dashboard `Version 2`')
 
-#client = pymongo.MongoClient("localhost")
+#URI = "localhost"
 URI = f"mongodb+srv://{st.secrets['db_username']}:{st.secrets['db_pw']}@toucanfortune.gzo0glz.mongodb.net/?retryWrites=true&writeConcern=majority"
 client = pymongo.MongoClient(URI)
 db = client.toucan
@@ -52,32 +52,32 @@ while(True):
     #st.write(df)
 
     with placeholder.container():
-        st.markdown('### Inside condition')
+        st.markdown('### Conditions internes')
         col31, col32, col33, col34 = st.columns(4)
-        col31.metric("Temp.", format(df.iloc[0]['T1'], '.2f') + " °C",
+        col31.metric("Température", format(df.iloc[0]['T1'], '.2f') + " °C",
                      format(df.iloc[0]['T1'] - df.iloc[1]['T1'], '.2f') + " °C")
-        col32.metric("Humidity.", format(df.iloc[0]['RH_1'], '.2f') + " %",
+        col32.metric("Humidité", format(df.iloc[0]['RH_1'], '.2f') + " %",
                      format(df.iloc[0]['RH_1'] - df.iloc[1]['RH_1'], '.2f') + " %")
-        col33.metric("Appliance", format(df.iloc[0]['Appliances'], '.2f') + " wh",
+        col33.metric("Électro", format(df.iloc[0]['Appliances'], '.2f') + " wh",
                      format(df.iloc[0]['Appliances'] - df.iloc[1]['Appliances'], '.2f') + " wh")
-        col34.metric("Light", format(df.iloc[0]['lights'], '.2f') + " wh",
+        col34.metric("Éclairage", format(df.iloc[0]['lights'], '.2f') + " wh",
                      format(df.iloc[0]['lights'] - df.iloc[1]['lights'], '.2f') + " wh")
         # Row A
-        st.markdown('### Outside Weather')
+        st.markdown('### Conditions externes')
         col11, col12= st.columns(2)
-        col11.metric("Temp.", format(df.iloc[0]['T_out'], '.2f') +" °C", format(df.iloc[0]['T_out'] - df.iloc[1]['T_out'], '.2f') + " °C")
-        col12.metric("Humidity.", format(df.iloc[0]['RH_out'], '.2f') +" %", format(df.iloc[0]['RH_out'] - df.iloc[1]['RH_out'], '.2f') + " %")
+        col11.metric("Température", format(df.iloc[0]['T_out'], '.2f') +" °C", format(df.iloc[0]['T_out'] - df.iloc[1]['T_out'], '.2f') + " °C")
+        col12.metric("Humidité", format(df.iloc[0]['RH_out'], '.2f') +" %", format(df.iloc[0]['RH_out'] - df.iloc[1]['RH_out'], '.2f') + " %")
 
 
 
         col21, col22, col23, col24 = st.columns(4)
-        col21.metric("Press.", format(df.iloc[0]['Press_mm_hg'], '.1f') + " mmHg",
+        col21.metric("Pression Atm.", format(df.iloc[0]['Press_mm_hg'], '.1f') + " mmHg",
                      format(df.iloc[0]['Press_mm_hg'] - df.iloc[1]['Press_mm_hg'], '.1f') + " mmHg")
-        col22.metric("Windspeed", format(df.iloc[0]['Windspeed'], '.2f') + " mph",
+        col22.metric("Vitesse du vent", format(df.iloc[0]['Windspeed'], '.2f') + " mph",
                      format(df.iloc[0]['Windspeed'] - df.iloc[1]['Windspeed'], '.2f') + " mph")
-        col23.metric("Visibility.", format(df.iloc[0]['Visibility'], '.2f') + " m",
+        col23.metric("Visibilité", format(df.iloc[0]['Visibility'], '.2f') + " m",
                      format(df.iloc[0]['Visibility'] - df.iloc[1]['Visibility'], '.2f') + " m")
-        col24.metric("Tdewpoint", format(df.iloc[0]['Tdewpoint'], '.2f') + " °C Td",
+        col24.metric("Temp. de rosée", format(df.iloc[0]['Tdewpoint'], '.2f') + " °C Td",
                      format(df.iloc[0]['Tdewpoint'] - df.iloc[1]['Tdewpoint'], '.2f') + " °C Td")
 
 
