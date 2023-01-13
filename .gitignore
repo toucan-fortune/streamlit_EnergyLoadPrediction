@@ -3,3 +3,4 @@
 *.csv
 *.json
 datasim.py
+.streamlit/secrets.toml
