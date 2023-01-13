@@ -41,8 +41,8 @@ add_bg_from_local('CollegeAhuntsic_Logo.png')
 
 #st.sidebar.header('Dashboard `Version 2`')
 
-client = pymongo.MongoClient("localhost")
-#client = pymongo.MongoClient("mongodb+srv://toucanfortune:rouedefortune@toucanfortune.gzo0glz.mongodb.net/?retryWrites=true&writeConcern=majority")
+#client = pymongo.MongoClient("localhost")
+client = pymongo.MongoClient("mongodb+srv://toucanfortune:rouedefortune@toucanfortune.gzo0glz.mongodb.net/?retryWrites=true&writeConcern=majority")
 db = client.toucan
 collection = db.energydata_complete
 
