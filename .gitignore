@@ -1,8 +1,0 @@
-/.ipynb_checkpoints
-*.ipynb
-*.csv
-*.json
-datasim.py
-.streamlit/secrets.toml
-/__pycache__
-.gitignore
