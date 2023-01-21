@@ -5,3 +5,4 @@
 datasim.py
 .streamlit/secrets.toml
 /__pycache__
+.gitignore
